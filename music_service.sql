@@ -1,0 +1,48 @@
+CREATE TABLE IF NOT EXISTS Performer (
+	Performer_id SERIAL PRIMARY KEY,
+	Pseudonym VARCHAR(60) NOT NULL,
+	Rhythm TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Genre (
+	Genre_id SERIAL PRIMARY KEY,
+	Direction VARCHAR(60)
+);
+
+CREATE TABLE IF NOT EXISTS Genre_Performer (
+	id SERIAL PRIMARY KEY,
+	Genre_id INTEGER NOT NULL REFERENCES Genre,
+	Performer_id INTEGER NOT NULL REFERENCES Performer
+);
+
+CREATE TABLE IF NOT EXISTS Album (
+	Album_id SERIAL PRIMARY KEY,
+	Name VARCHAR(60),
+	Year integer
+);
+
+CREATE TABLE IF NOT EXISTS Album_Performer (
+	id SERIAL PRIMARY KEY,
+	Album_id INTEGER NOT NULL REFERENCES Album,
+	Performer_id INTEGER NOT NULL REFERENCES Performer
+);
+
+CREATE TABLE IF NOT EXISTS Track (
+	Track_id SERIAL PRIMARY KEY,
+	Name VARCHAR(60),
+	Duration integer,
+	Album INTEGER NOT NULL REFERENCES Album	
+);
+
+
+CREATE TABLE IF NOT EXISTS Collection (
+	Collection_id SERIAL PRIMARY KEY,
+	Name VARCHAR(60),
+	Year integer
+);
+
+CREATE TABLE IF NOT EXISTS Collection_Track (
+	id SERIAL PRIMARY KEY,
+	Collection_id INTEGER NOT NULL REFERENCES Collection,
+	Track_id INTEGER NOT NULL REFERENCES Track
+);
